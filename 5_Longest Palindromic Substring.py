@@ -7,6 +7,7 @@ You may assume that the maximum length of S is 1000, and there exists one unique
 
 """
 S1 : 
+    Leetcode Pass
     O(n^2)
     1. 整合了奇数和偶数问题，以某个元素为中心分别计算 奇和偶长度的 回文串。
     2. 在i位置 (i,i+1) 和(i-1,i+1) 分别向两边扩展即可。 
