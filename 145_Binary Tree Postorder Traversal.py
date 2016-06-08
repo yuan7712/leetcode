@@ -29,7 +29,7 @@ S2:
             case right:  直接pop 父节点即可
             case left：  转向right 并且设置父点tag==1
 """
-class Solution(object):
+class Solution2(object):
     def postorderTraversal(self, root):
         """
         :type root: TreeNode
@@ -54,19 +54,6 @@ class Solution(object):
                 m_stack[-1][1] = 1   # tag = 1
                 p  = m_stack[-1][0].right   # p可能null
         return ans
-
-        
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -114,6 +101,40 @@ class Solution3(object):
                 else:
                     p = None # over
         return ans
+
+
+
+"""
+S4 :
+"""
+
+class Solution(object):
+    def postorderTraversal(self, root):
+        if not root :
+            return []
+        m_stack = []
+        ans = []
+        last = None # last pop
+
+        while root or m_stack:
+            if root:
+                m_stack.append(root)
+                # pre order
+                #ans.append(root.val)
+                root = root.left
+            else :
+                root = m_stack[-1]
+                #in order
+                #if root.right == None or root.right!=last:
+                    #ans.append(root.val)
+                if root.right == None or root.right == last:
+                    last = m_stack.pop()
+                    # post order 
+                    ans.append(last.val)
+                    root = None
+                else:
+                    root = root.right
+        return ans        
 
 
 if __name__ == '__main__':

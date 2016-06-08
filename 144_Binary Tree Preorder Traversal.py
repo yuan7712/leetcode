@@ -34,6 +34,9 @@ class Solution1(object):
         while m_stack:
             p = m_stack.pop()
             ans.append(p.val)
+            #  先序 查看此时栈中node
+            fa = [i.val for i in m_stack]
+            print((p.val,fa))
             # 先right 后 left ; 这样才能先序 根左右
             if p.right : 
                 m_stack.append(p.right)
@@ -55,6 +58,10 @@ class Solution2(object):
             if root :
                 m_stack.append(root)
                 ans.append(root.val)
+                #  先序 查看此时栈中node 
+                fa = [i.val for i in m_stack]
+                print((root.val,fa))
+
                 root = root.left
             else:
                 root = m_stack.pop().right
@@ -71,15 +78,54 @@ class Solution(object):
             return []
         m_stack = []
         ans = []
+        last = None # last pop
         while root or m_stack:
             if root:
                 m_stack.append(root)
+                #  先序 查看此时栈中node
+                #fa = [i.val for i in m_stack]
+                #print((root.val,fa))
+
+                # pre
+                ans.append(root.val)
                 root = root.left
+
             else :
                 root = m_stack[-1]
+                #inorder
+                #if root.right == None or root.right!=last:
+                    #ans.append(root.val)
+                if root.right == None or root.right == last:
+                    last = m_stack.pop()
+                    # post order 
+                    #ans.append(last.val)
+                    root = None
+                else:
+                    root = root.right
+        return ans
 
 
+"""
+创建二叉树模块，输入完全二叉树结构，0单元不占， Null 用'#' 表示; 返回root
 
+"""
+class Create(object):
+    def createTree(self,nodes):
+        if len(nodes) <=1 :
+            return None
+
+        for i in range(len(nodes)-1,-1,-1):
+            if nodes[i] == '#':
+                tmp = None
+                nodes[i] = tmp
+            else:
+                tmp = TreeNode(nodes[i])
+                nodes[i] = tmp
+                if 2 * i < len(nodes):
+                    tmp.left = nodes[2*i]
+                if 2 * i +1 <len(nodes):
+                    tmp.right = nodes[2*i+1]
+        return nodes[1]
 
 
 
@@ -89,13 +135,16 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    S =Solution()
+    S =Solution2()
     p1 = TreeNode(1)
     p2 = TreeNode(2)
     p3 = TreeNode(3)
     p1.right = p2
     p2.left  = p3
-    ss = S.preorderTraversal(p1)
+
+    C = Create()
+    cc = C.createTree([0,4,3,5,1,2,6,7])
+    ss = S.preorderTraversal(cc)
     print(ss)
 
 
