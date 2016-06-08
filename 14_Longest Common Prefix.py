@@ -24,7 +24,7 @@ class Solution(object):
 
 if __name__ == '__main__':
     S = Solution()
-    SS = S.longestCommonPrefix([['ss']])
+    SS = S.longestCommonPrefix(['ss','s'])
     print(SS)                    
 
 

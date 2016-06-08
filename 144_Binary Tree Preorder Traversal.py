@@ -1,0 +1,55 @@
+"""
+Given a binary tree, return the preorder traversal of its nodes' values.
+
+先序遍历二叉树
+
+T: leetcode 输入按照完全二叉树  [1,null,2,3...]
+"""
+
+#Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+"""
+S: 
+    先序遍历： 根 左 右
+    1. visit root
+    2. right push
+    3. 转 left
+"""
+class Solution(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root :
+            return []
+        m_stack = []
+        ans = []
+        m_stack.append(root)
+
+        while m_stack:
+            p = m_stack.pop()
+            ans.append(p.val)
+            if p.right : 
+                m_stack.append(p.right)
+            if p.left:
+                m_stack.append(p.left)
+        return ans
+
+if __name__ == '__main__':
+    S =Solution()
+    p1 = TreeNode(1)
+    p2 = TreeNode(2)
+    p3 = TreeNode(3)
+    p1.right = p2
+    p2.left  = p3
+    ss = S.preorderTraversal(p1)
+    print(ss)
+
+
+
