@@ -32,14 +32,19 @@ class Solution1(object):
                 m_stack.append(p)
                 p = p.left
             p = m_stack.pop()
-            ans.append(p.val)
+            ans.append(p.val) #visit
             p = p.right
         return ans
 
 
-
+"""
+S2: Morris  遍历 时间o(n) 空间o(1)  不使用栈
+"""
 class Solution(object):
     def inorderTraversal(self, root):
+
+                
+
         
 
 

@@ -1,8 +1,7 @@
+# -*- coding: utf-8 -*-
 """
 Given a binary tree, return the preorder traversal of its nodes' values.
-
 先序遍历二叉树
-
 T: leetcode 输入按照完全二叉树  [1,null,2,3...]
 """
 
@@ -14,13 +13,13 @@ class TreeNode(object):
         self.right = None
 
 """
-S: 
+S1: 
     先序遍历： 根 左 右
     1. visit root
     2. right push
     3. 转 left
 """
-class Solution(object):
+class Solution1(object):
     def preorderTraversal(self, root):
         """
         :type root: TreeNode
@@ -35,11 +34,59 @@ class Solution(object):
         while m_stack:
             p = m_stack.pop()
             ans.append(p.val)
+            # 先right 后 left ; 这样才能先序 根左右
             if p.right : 
                 m_stack.append(p.right)
             if p.left:
                 m_stack.append(p.left)
         return ans
+
+"""
+S2:
+
+"""
+class Solution2(object):
+    def preorderTraversal(self, root):
+        if not root :
+            return []
+        m_stack = []
+        ans = []
+        while root or m_stack:
+            if root :
+                m_stack.append(root)
+                ans.append(root.val)
+                root = root.left
+            else:
+                root = m_stack.pop().right
+        return ans
+
+
+"""
+S3:
+
+"""
+class Solution(object):
+    def preorderTraversal(self, root):
+        if not root :
+            return []
+        m_stack = []
+        ans = []
+        while root or m_stack:
+            if root:
+                m_stack.append(root)
+                root = root.left
+            else :
+                root = m_stack[-1]
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     S =Solution()
