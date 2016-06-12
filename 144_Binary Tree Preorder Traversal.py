@@ -14,7 +14,7 @@ class TreeNode(object):
 
 """
 S1: 
-    先序遍历： 根 左 右
+    visit 当前node 后将其右孩子入栈
     1. visit root
     2. right push
     3. 转 left
@@ -33,10 +33,7 @@ class Solution1(object):
 
         while m_stack:
             p = m_stack.pop()
-            ans.append(p.val)
-            #  先序 查看此时栈中node
-            fa = [i.val for i in m_stack]
-            print((p.val,fa))
+            ans.append(p.val)  #visit
             # 先right 后 left ; 这样才能先序 根左右
             if p.right : 
                 m_stack.append(p.right)
@@ -46,6 +43,11 @@ class Solution1(object):
 
 """
 S2:
+    使用栈 非递归. visit当前node后 将自己也入栈.
+    和S1 类似只是出栈不一样. 
+    1. visit  root  并且将root入栈 (而S1 visit root 后 root 不进栈而是root.right 进栈)一直向左,
+            栈 中存放的全部是 已经visit的node
+    2. 当到了左侧尽头时， 将栈顶pop ,转右即可.
 
 """
 class Solution2(object):
@@ -57,22 +59,19 @@ class Solution2(object):
         while root or m_stack:
             if root :
                 m_stack.append(root)
-                ans.append(root.val)
-                #  先序 查看此时栈中node 
-                fa = [i.val for i in m_stack]
-                print((root.val,fa))
-
+                ans.append(root.val)  # visit & push
                 root = root.left
             else:
-                root = m_stack.pop().right
+                root = m_stack.pop().right  #pop & turn right
         return ans
 
 
 """
 S3:
-
+    前 中 后序 通用代码;  模拟递归栈的出栈策略.
+    1. visit node 时, 栈中为 根->此node   path
 """
-class Solution(object):
+class Solution3(object):
     def preorderTraversal(self, root):
         if not root :
             return []
@@ -82,14 +81,9 @@ class Solution(object):
         while root or m_stack:
             if root:
                 m_stack.append(root)
-                #  先序 查看此时栈中node
-                #fa = [i.val for i in m_stack]
-                #print((root.val,fa))
-
                 # pre
                 ans.append(root.val)
                 root = root.left
-
             else :
                 root = m_stack[-1]
                 #inorder
@@ -105,9 +99,51 @@ class Solution(object):
         return ans
 
 
+
+
+"""
+S4:
+Morris
+    前序Morris和中序类似,详看中序;
+    只有一处不同 p visit 的位置. 前序应该在转向左侧时 visit; 中序是返回父点时 visit (左根右).
+
+    T: 
+    1. 这三种Morris 代码基本一致.
+
+    2. 前序Morris 为了不改变原树结构, 会两次访问root, 如果可以毁坏树结构,
+     完全可以一次访问, 具体看 114_ Flatten Binary Tree to Linked List
+"""
+class Solution4(object):
+    def preorderTraversal(self, root):
+        if  not root :
+            return []
+        ans = []
+        p  = root
+        while  p:
+            if not p.left:
+                ans.append(p.val)  #左子树null  visit
+                p = p.right
+            else:
+                tmp = p.left
+                while tmp.right and tmp.right!=p:
+                    tmp = tmp.right
+                if tmp.right == p:  # 第二次访问 
+                    tmp.right = None
+                    p = p.right
+                else:  # 第一次访问 建立线索
+                    tmp.right = p
+                    ans.append(p.val)   # 转向左子树时候  visit
+                    p = p.left
+                    
+
+        return ans
+
+
+
+
+
 """
 创建二叉树模块，输入完全二叉树结构，0单元不占， Null 用'#' 表示; 返回root
-
 """
 class Create(object):
     def createTree(self,nodes):
@@ -129,13 +165,8 @@ class Create(object):
 
 
 
-
-
-
-
-
 if __name__ == '__main__':
-    S =Solution2()
+    S =Solution1()
     p1 = TreeNode(1)
     p2 = TreeNode(2)
     p3 = TreeNode(3)
@@ -148,4 +179,16 @@ if __name__ == '__main__':
     print(ss)
 
 
+"""
+S: 
+    先序遍历  根 左 右 
+    1. 递归遍历
+    2. 非递归  使用栈.
+        2.1 ： S1
+        2.2 :  S2
+        2.3 :  S3  模拟递归. 前中后 通用.
+        T:  与中序类似 他们只是栈 pop 策略不同.
+
+    3. Morris  不使用栈 S4
+"""
 
