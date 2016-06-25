@@ -13,6 +13,7 @@ class TreeNode(object):
 
 """
 S1:
+     和 105_Construct Binary Tree from Preorder and Inorder Traversal  类似.
     传递index
 
 """
