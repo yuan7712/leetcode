@@ -30,10 +30,6 @@ class Solution(object):
             p = p.next
         if l1 ==None :
             l1 = l2
-        while l2:
-            tmp = l2
-            l2 = l2.next
-            p.next = tmp
-            p = p.next
+        p.next = l1
         return header.next
 
