@@ -34,6 +34,7 @@ T:
 R: 
     leetcode 多种方法
     https://discuss.leetcode.com/topic/19110/c-recursive-iterative-bit-manipulation-solutions-with-explanations/2
+    http://www.cnblogs.com/TenosDoIt/p/3451902.html    #与此中S2类似
 """
 class Solution1(object):
     def subsets(self, nums):
@@ -54,7 +55,7 @@ class Solution1(object):
 
 """
 S2: 
-    递归
+    递归 
     []
     [1]  
         [1,2] 
@@ -93,7 +94,10 @@ class Solution2(object):
 
 """
 S3: 
-    递归 -- 位向量
+    递归 -- 位向量  dfs
+    与S2 类似, 只是在递归时 
+            S3： [1,2,3]   分为选or 不选1, 记录path
+            S2:  [1,2,3]   分为选1 or 2 or 3 .记录path
     [1,2,3] 总共2^3 = 8 种, 即可以记录每个元素是否被选择.
 
             1:      1
@@ -107,6 +111,9 @@ S3:
 
 T: 
     1. ans stat 全局修改
+R: 
+    http://www.cnblogs.com/TenosDoIt/p/3451902.html    #于此中S1类似dfs
+
 """
 class Solution3(object):
     def subsets(self, nums):
@@ -224,7 +231,13 @@ class Solution6(object):
 
 
 
+"""
+S1: 增量
+S3：dfs  S2 类似
+S4：  S1 迭代
+S5 S6 ：二进制
 
+"""
 
 
 

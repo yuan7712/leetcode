@@ -104,7 +104,7 @@ class Solution2(object):
 
 """
 S3:
-    迭代 -- 与78-S2对应.
+    递归 -- 与78-S2对应.
     稍加判断即可.
     [1,2,2]
     []
@@ -147,6 +147,16 @@ class Solution(object):
 """
 S4: 
     使用set 解决去重问题, 使用78中任一方法均可
+"""
+
+
+"""
+S1 : 迭代 增量构造
+S3:  递归  记录path, 模仿78-S3 也可以写类似dfs
+                      http://www.cnblogs.com/TenosDoIt/p/3451902.html
+
+S2： 此方法比较独特, 与78中不一样. 78中二进制不适用.
+
 """
 if __name__ == '__main__':
     S= Solution()
