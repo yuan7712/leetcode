@@ -12,7 +12,7 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 
 """
 
-class Solution(object):
+class Solution1(object):
     def nextPermutation(self, nums):
         """
         :type nums: List[int]
@@ -53,16 +53,56 @@ class Solution(object):
 
 
 
+"""
+S2: 
+
+    16/9/9
+    与 46 47 有关
+    修改S1 最后不排序, reverse
+
+"""
+class Solution(object):
+    def nextPermutation(self, nums):
+        nums_len  = len(nums)
+        i  = nums_len-1
+        while i-1>=0 and nums[i]<=nums[i-1]:  #找到第一个 反串
+            i -=1
+        if i ==0 :  #321
+            nums.reverse()
+            return nums
+        # i 为第一个 递减位置, 逆向遍历找比nums[i-1] 大的最小值
+        j = 0
+        for k in range(len(nums)-1,i-1,-1):  #从nums[i:]找比nums[i]大的最小值
+            if nums[k] > nums[i-1]:
+                j = k
+                break
+
+        nums[i-1],nums[j] = nums[j],nums[i-1]
+        print(nums)
+        # 将nums[i:]  排序 reverse 即可
+        b , e = i , len(nums)-1
+        while b<e:
+            nums[b],nums[e] = nums[e],nums[b]
+            b+=1
+            e-=1
+        return nums
+
+
+
+
+
+
+
+
+
 
 
 
 
 if __name__ == '__main__':
     S = Solution()
-    ss = S.nextPermutation([1,5,1])
+    ss = S.nextPermutation([1,3,2])
     print(ss)
-
-
 
 
 
@@ -74,6 +114,7 @@ A :  [6,8,7,4,3,2] ->[7,2,3,4,6,8]
      1. 从后向前找到到第一个降序的对， 如 6,8 
      2. 修改6 处的值，使用之后的比6大的最小值 即7，替换。
      3. 将7 之后的数字排序。升序
+            注： 此时7 之后的数字本来就是 降序, 变为升序即可.无须排序使用S2  reverse即可.
 
 
 Q： 1. 对7之后的排序，题目不允许再次分配空间，所以不能题目中sorted分片;自己简单实现冒泡 .(C++ 中有局部排序)  
