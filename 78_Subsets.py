@@ -233,8 +233,9 @@ class Solution6(object):
 
 """
 S1: 增量
+S4：  S1 增量迭代
+
 S3：dfs  S2 类似
-S4：  S1 迭代
 S5 S6 ：二进制
 
 """

@@ -50,13 +50,40 @@ class Solution1(object):
 S2： DP  超时！
 
     1. 使用dp[i][j]  表示i->j 是否是回文串；
-            如果s[i] == s[j] 那么是否是回文决定于 dp[i+1][ j - 1]
+            如果s[i] == s[j] 那么是否是回文决定于 dp[i+1][j-1]
             如果s[i] != s[j] 的时候， dp[i][j] 直接就是 false。
     2. 动态规划的进行是按照字符串的长度从1 到 n推进的。
 
     3. 相当于会对所有可能长度的串进行判断是否回文。(只不过利用了长度k-1的信息)
          超时！！！
 
+T: 
+    len(s) = 5 构建dp 矩阵
+      1  2  3  4  5  
+    1 T
+    2 T  T
+    3    T  T
+    4       T  T
+    5          T  T
+    初始状态如上, 我们只要填补上半矩阵即可. dp[i][j] 由dp[i+1][j-1]决定. 双层循环
+    S2 是按照斜对角,一层层, 分别计算不同长度字串dp.
+
+R: 
+    修改S2中dp数组计算.  如上图所示我们只要从底向上遍历矩阵即可.  
+
+    dp = [[0]*s_l for i in range(s_l)] 
+    for i in range(len(s)-1,-1,-1):
+        for j in range(i,len(s)):
+            if i == j :
+                dp[i][j] = 1    #True
+            else :
+                if s[i] == s[j] : #dp[i][j] 由dp[i+1][j-1] 决定
+                    if dp[i+1][j-1] ==1  or j = i+1:
+                        dp[i][j] = 1
+    return
+    或者:
+        if s[i] == s[j] and (i-j <= 1 or dp[i+1][j-1] ==1  )  #将i==j 合并 此时s[i]==s[j]
+            dp[i][j] = 1
 
 """
 class Solution2(object):
