@@ -51,6 +51,6 @@ if __name__ == '__main__':
 """
 Q : 
      括号匹配， 使用栈
-
+     
      python  栈 使用list 模拟， append 和 pop 入栈出栈。
 """
