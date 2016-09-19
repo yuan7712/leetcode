@@ -18,7 +18,7 @@ class Solution(object):
         flag = [0]*9
         #判断行
         for i in range(9):
-            flag = [0]*9
+            flag = [0]*9 # 判断每行,每行存在的数字放到对应位置,如果>=2  False
             for j in range(9):
                 if board[i][j]!='.':
                     flag[int(board[i][j])-1] += 1 
@@ -76,4 +76,5 @@ Q: 该题目是判断给定的矩阵是否是 合法的.(这个数独不一定�
     对每个九宫格的判断，首先定位到了9个格，然后依次遍历
 
 T： 运行时间长
+37. Sudoku Solver
 """
