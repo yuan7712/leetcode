@@ -1,3 +1,8 @@
+"""
+S1: 
+    1. 使用数组记录
+    2. 或者不记录 将123 -> 321 
+"""
 class Solution(object):
     def isPalindrome(self, x):
         """
@@ -27,7 +32,7 @@ class Solution2:
         if x < 0:
             return False
         div = 1
-        while x / div >= 10:
+        while x / div >= 10:  
             div *= 10
         while x != 0:
             q = x // div

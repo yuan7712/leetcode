@@ -34,7 +34,12 @@ class Solution(object):
 
 """
 S2:
-    leetcode  牛顿迭代  --？？  未看
+    leetcode  牛顿迭代 
+T: 
+    牛顿迭代  f(x) = 0 解方程     
+              迭代公式：     Xk+1 = Xk - (f(Xk)/f'(Xk)) 
+    此处解方程   x^2 - a = 0 
+                 Xk+1 = Xk - (Xk^2-a)/2*Xk =  Xk/2+a/2Xk
 R：
     https://discuss.leetcode.com/topic/24532/3-4-short-lines-integer-newton-every-language
     http://www.cnblogs.com/AnnieKim/archive/2013/04/18/3028607.html 
@@ -49,6 +54,6 @@ class Solution(object):
 
 if __name__ == '__main__':
     S =Solution()
-    ss = S.mySqrt(1)
+    ss = S.mySqrt(8)
     print(ss)
 
