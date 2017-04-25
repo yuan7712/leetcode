@@ -49,14 +49,14 @@ S2:
          然后分别swap(S[0],S[i]) ,但是此处有重复，所以直接pass 1,1,1 直接swap(1,2)即可
          如果swap(1,1),剩余的顺序改变但是仍然与 不swap 有相同子序列  
 T: 
-    [0,0,0,1,9] 
+    [0,0,0,1,9]                其实只要保证swap的两个数字不同就能保证不重复  //add 2017/3/1
     此处swap 时只要保证,在该子序列中  nums[start]和同一个数字只swap 一次.
     不能简单记录last swap值+ while 跳过.  swap 后子序列不一定増序
     [0,0,0,1,9]  swap(0,9) -> [9,0,0,1,0]  此时子序列[0,0,1,0] 只记last 可能error   
 
 R:
     http://www.cnblogs.com/TenosDoIt/p/3662644.html
-    http://www.jiuzhang.com/solutions/permutations-ii/ 
+    http://www.jiuzhang.com/solutions/permutations-ii/           // add  2017.3.1   即自己需要创建一个path路径，这样就不会带来由于swap而造成重复
          第二种 每次不再swap,而是使用切片将nums 分为两部分  已经确定的+剩余序列 
          [0,0,0,1,9] -> [0,9] +[0,0,1]   [0,9] 是已经确定的 [0,0,1] 剩余序列 
 
@@ -71,6 +71,7 @@ R:
 
 """
 
+# 此方法陷入  等待的序列必须是有序的 例如 [0,0,0,1,9] 交换 0 9 后 无序但并不影响；
 class Solution2(object):
     def permuteUnique(self, nums):
         ans = []
@@ -91,9 +92,9 @@ class Solution2(object):
             return
         mdict = []  #nums[start]  swap 的数字放到list中, 保证不swap 重复值
         for i in range(start,len(nums)):
-            if nums[i] in mdict:  #防重复
+            if nums[i] in mdict:  #防重复      利用map解决swap时出现的重复问题
                 continue
-            nums[start],nums[i] = nums[i], nums[start]
+            nums[start],nums[i] = nums[i], nums[start]    # add 2017.3.1 其实只要交换的二者不相同即可？？即S3
             self.pers(nums,start+1,ans)  #确定nums[start],继续判断下一位 start+1
             nums[start] , nums[i] = nums[i], nums[start]  # 还原
             mdict.append(nums[i])
@@ -104,11 +105,11 @@ class Solution2(object):
 
 """
 S3
-    --leetcode
-    该方法传递nums时,使用值传递,i等价于之前的start, 只要swap 一次即可,因为值传递修改也无效.
+    --leetcode   **** best
+    该方法传递nums时,i等价于之前的start, 只要swap 一次即可,因为值传递修改也无效.
     [0,0,0,1,9] 
     i=1时： 0分别与 0 1 9 swap
-        [0,0,0,1,9]   [0,1,0,0,9]  [0,9,0,0,1]  它能保证i=2之后的子序列有序, 传递值继续递归.
+        [0,0,0,1,9]   [0,1,0,0,9]  [0,9,0,0,1]  它能保证i=2之后的子序列有序, 传递值继续递归.   # error  解释错误； 本质是只要不太就能交换
 
 R: 
     https://discuss.leetcode.com/topic/8831/a-simple-c-solution-in-only-20-lines
@@ -121,7 +122,7 @@ class Solution {
             return;
         }
         for (int k = i; k < j; k++) {
-            if (i != k && num[i] == num[k]) continue;
+            if (i != k && num[i] == num[k]) continue;     # 不是传递值的问题 而是只要  num[i] ！= num[k]  那么交换就有意义，交换的含义是确定当前位置 然后递归其余位置，，如果相同则无意义
             swap(num[i], num[k]);
             recursion(num, i+1, j, res);
         }
@@ -182,6 +183,15 @@ class Solution(object):
 
 
 
+"""
+
+思路
+1. 使用swap  每次交换两个Node, 但是只要二者值相同就不再交换没意义。
+
+2. 记录path, 依然是dfs每次确定一个位置，保证原有的 nums 是有序的， 而且中途不再修改此顺序。
+             path 每次dfs时添加一个Node, aaab       确定第一个位置时值能 ab 两种
+3. S4
+"""
 
         
 

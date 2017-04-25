@@ -117,9 +117,9 @@ class Solution(object):
     def permute(self, nums):
 
         pre = [[]]
-        for i in range(len(nums)):
+        for i in range(len(nums)):   # 依次add  每个数字
             tmp = []
-            for j in pre:
+            for j in pre:   # 例如add 3 时候要对之前 12 组成的两种分别找不同的位置
                 for k in range(len(j)+1):  #[1,2,3] 长度为1, add 4 时可以放4个位置
                     tmp.append(j[0:k]+[nums[i]]+j[k:]) #不同位置insert
             pre = tmp   #保留上层状态, 下层继续迭代

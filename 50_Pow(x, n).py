@@ -37,31 +37,32 @@ class Solution(object):
                 #return 1/x *1/self.myPow(x,2147483647)
             return 1/self.myPow(x,-1*n)
         ans = 1
-        while n>1:
+        while n>0:
             if n%2 == 1:
                 ans *= x
             x = x*x
             n = n//2
-        return ans*x
+        return ans
 
 
 """
 S2:
     递归 
 https://discuss.leetcode.com/topic/21837/5-different-choices-when-talk-with-interviewers
+    double myPow(double x, int n) { 
+        if(n==0) return 1;
+        if(n<0){
+            n = -n;
+            x = 1/x;
+        }
+        return n%2==0 ? myPow(x*x, n/2) : x*myPow(x*x, n/2);
+    }
 
 """
-double myPow(double x, int n) { 
-    if(n==0) return 1;
-    if(n<0){
-        n = -n;
-        x = 1/x;
-    }
-    return n%2==0 ? myPow(x*x, n/2) : x*myPow(x*x, n/2);
-}
+
 
 
 if __name__ == '__main__':
     S =Solution()
-    ss = S.myPow(2,2147483641)
+    ss = S.myPow(2,10)
     print(ss)
