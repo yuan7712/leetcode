@@ -43,7 +43,7 @@ class Solution(object):
 
 if __name__ == '__main__':
     S = Solution()
-    ss =S.getPermutation(3,1)
+    ss =S.getPermutation(3,2)
     print(ss)
 
 

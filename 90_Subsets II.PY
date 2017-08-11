@@ -161,7 +161,7 @@ S2： 此方法比较独特,
 """
 if __name__ == '__main__':
     S= Solution()
-    ss =S.subsetsWithDup([1,2,2])
+    ss =S.subsetsWithDup([1,2,2,2])
     print(ss)
 
 

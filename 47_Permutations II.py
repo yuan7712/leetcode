@@ -197,7 +197,7 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    S = Solution()
+    S = Solution2()
     ss = S.permuteUnique([1,2,2])
     print(ss)
     

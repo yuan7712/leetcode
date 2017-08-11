@@ -82,6 +82,8 @@ class Solution2(object):
         start: 起始位置.[1,2,3]  从2开始则求[2,3] subs
         path: 递归到此处path
         """
+
+        # 什么都不增加
         tmp = path[:]
         ans.append(tmp)
         for i in range(start,len(nums)):
@@ -89,7 +91,6 @@ class Solution2(object):
             self.subs(nums,ans,i+1,path)
             path.pop()
         return
-
 
 
 """
@@ -115,6 +116,9 @@ R:
     http://www.cnblogs.com/TenosDoIt/p/3451902.html    #于此中S1类似dfs
 
 """
+
+
+
 class Solution3(object):
     def subsets(self, nums):
         if not nums:
@@ -243,6 +247,6 @@ S5 S6 ：二进制
 
 
 if __name__ == '__main__':
-    S =Solution()
+    S =Solution2()
     ss =S.subsets([1,2,3])
     print(ss)
