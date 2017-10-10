@@ -154,8 +154,8 @@ class Solution(object):
 
         for i in range(start,len(s)-1):  #  [start,i] + dfs(i+1)
             if wordDict.get(s[start:i+1],False) :  # exist
-                tmp = self.dfs(s,wordDict,cacheDict,i+1)   #["case 1", " case 2"]
-                for item in tmp :
+                tmp = self.dfs(s,wordDict,cacheDict,i+1)   #["case 1", " case 2"]   什么表示不可切分呢？？
+                for item in tmp :     
                     ans.append(s[start:i+1]+" "+item)
         cacheDict[start] = ans
         return ans 
@@ -170,7 +170,9 @@ S：
 
      之前从下到上的DP,对于求解最优解法可行, 也能中途记录不同位置如何划分子问题, 最后进而还原该最优解;
 
-    但是此题目 求解所有解,  从下到上  不可行;  所以使用dfs记录全部结果
+    但是此题目 求解所有解,  从下到上  不可行;  所以使用dfs记录全部结果  ! 2017/0812  error
+
+     迭代同样，都是在一维数组中国纪录所有的切分数组即可;
 
 """
 

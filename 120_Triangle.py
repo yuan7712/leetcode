@@ -61,7 +61,7 @@ class Solution1(object):
         m = len(triangle)
 
         stat = triangle[-1][:]
-
+        
         for i in range(m-2,-1,-1): #rows
             for j in range(len(triangle[i])):
                 stat[j] = min(stat[j], stat[j+1])+triangle[i][j]
@@ -81,6 +81,7 @@ S2:   DP 递归+cache
 """
 
 class Solution2(object):
+
     def minimumTotal(self, triangle):
         if not triangle:
             return -1;
@@ -93,6 +94,7 @@ class Solution2(object):
 
     def recur(self,triangle,cache,i,j):
         """
+        
         计算(i,j) 位置最优解
 
         """
